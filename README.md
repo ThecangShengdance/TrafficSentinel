@@ -1,5 +1,8 @@
 # 流量哨兵 TrafficSentinel
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Latest Release](https://img.shields.io/github/v/release/ThecangShengdance/TrafficSentinel?display_name=tag)](https://github.com/ThecangShengdance/TrafficSentinel/releases/latest)
+
 一个原生 SwiftUI 编写的 macOS 菜单栏流量监控 App，专为「用手机卡流量、需要盯住剩余额度」的场景设计。
 
 > 本 README、源码、脚本和截图都位于仓库根目录。
@@ -29,6 +32,14 @@
 - macOS 14.0 或更高版本（已在 macOS 27.2 / Apple Silicon 上验证）
 - Xcode 16 或更高版本（工程用 Xcode 27.2 构建）
 
+## 下载
+
+从 [GitHub Releases](https://github.com/ThecangShengdance/TrafficSentinel/releases/latest) 下载 `TrafficSentinel-1.0.0-macOS.zip`，解压后把「流量哨兵.app」拖进「应用程序」即可。
+
+首次打开如果系统提示「无法验证开发者」，请在 Finder 中右键点击 App →「打开」，或到「系统设置 → 隐私与安全性」中允许打开。
+
+> 发布包使用 ad-hoc 签名，未做 Apple 公证，不需要 Apple Developer 账号。
+
 ## 构建与运行
 
 ### 方式一：用 Xcode 运行
@@ -52,9 +63,17 @@ open TrafficSentinel.xcodeproj
 
 ### 方式三：下载已打包版本
 
-仓库不提交 `dist/` 构建产物。如果项目发布了 GitHub Releases，可以在 Releases 中下载 `.app`；也可以按方式二自行构建。第一次打开时，如果系统提示「无法验证开发者」，请在 Finder 中右键点击 App →「打开」，或到「系统设置 → 隐私与安全性」中允许打开。
+从 [Releases](https://github.com/ThecangShengdance/TrafficSentinel/releases/latest) 下载 `.zip` 并解压即可；每个 Release 都附带对应的 `SHA256` 校验文件。仓库不提交 `dist/` 构建产物，也可以按方式二自行构建。第一次打开时，如果系统提示「无法验证开发者」，请在 Finder 中右键点击 App →「打开」，或到「系统设置 → 隐私与安全性」中允许打开。
 
 > 工程没有开发者证书，使用 ad-hoc 签名（`CODE_SIGN_IDENTITY="-"`），因此不能做公证，也不依赖 Apple Developer 账号。
+
+### 打包发布文件
+
+```bash
+./scripts/package_release.sh
+```
+
+脚本会构建 Release 版，并生成 `dist/TrafficSentinel-<版本>-macOS.zip` 与对应的 `.sha256` 文件，可直接上传到 GitHub Releases。
 
 ## 使用说明
 
@@ -117,9 +136,12 @@ Sources/       源码
   Views/       仪表盘、倒计时卡片、设置、提醒面板、组件
   Assets.xcassets/AppIcon.appiconset
 scripts/
-  build.sh     命令行构建并打包到 dist/
-  make_icon.py 重新生成 App 图标（需要 Pillow / numpy）
+  build.sh            命令行构建并打包到 dist/
+  package_release.sh  构建 Release 并生成 zip + SHA256
+  make_icon.py        重新生成 App 图标（需要 Pillow / numpy）
 docs/          截图
+CHANGELOG.md   版本变更记录
+LICENSE        MIT 许可证
 ```
 
 `dist/` 和 `.build/` 是本地构建产物，已在 `.gitignore` 中忽略，不会提交到仓库。
@@ -133,3 +155,7 @@ python3 scripts/make_icon.py
 ```
 
 需要 Python 3 以及 Pillow、numpy（脚本会用 4× 超采样绘制后缩小）。
+
+## 许可证
+
+本项目采用 [MIT License](LICENSE)。Copyright © 2026 ThecangShengdance。
