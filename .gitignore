@@ -1,0 +1,15 @@
+# Build caches
+.build/
+DerivedData/
+DerivedDate/
+build/
+dist/
+
+# Xcode user-specific state
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+# macOS
+.DS_Store
