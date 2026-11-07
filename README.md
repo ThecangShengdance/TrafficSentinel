@@ -23,7 +23,7 @@
 
 ![仪表盘](docs/dashboard.png)
 
-![额度提醒](docs/alert.png)
+![额度提醒（界面示意）](docs/alert.png)
 
 ![设置](docs/settings.png)
 
